@@ -17,13 +17,24 @@ public class ProductsPage {
 
     public ProductsPage(WebDriver driver) { this.driver = driver; this.wait = new WaitUtils(driver); }
     public boolean isDisplayed() { return wait.visible(title).isDisplayed(); }
-    public void addBackpackToCart() { wait.clickable(backpackAdd).click(); }
-    public void removeBackpack() { wait.clickable(backpackRemove).click(); }
-    public void openCart() { wait.clickable(cart).click(); }
+    public void addBackpackToCart() { wait.jsClick(backpackAdd); }
+
+    public void removeBackpack() {
+        wait.jsClick(backpackRemove);
+        wait.invisible(cartBadge);
+    }
+
+    public void openCart() {
+        wait.jsClick(cart);
+        wait.urlContains("cart");
+    }
+
     public String getCartCount() { return wait.visible(cartBadge).getText(); }
     public boolean isCartBadgePresent() { return driver.findElements(cartBadge).size() > 0; }
+
     public void logout() {
-        wait.clickable(menu).click();
-        wait.clickable(logout).click();
+        wait.jsClick(menu);
+        wait.jsClick(logout);
+        wait.urlContains("saucedemo.com");
     }
 }
