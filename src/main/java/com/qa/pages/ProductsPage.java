@@ -15,21 +15,13 @@ public class ProductsPage {
     private final By menu = By.id("react-burger-menu-btn");
     private final By logout = By.id("logout_sidebar_link");
 
-    public ProductsPage(WebDriver driver) {
-        this.driver = driver;
-        this.wait = new WaitUtils(driver);
-    }
-
+    public ProductsPage(WebDriver driver) { this.driver = driver; this.wait = new WaitUtils(driver); }
     public boolean isDisplayed() { return wait.visible(title).isDisplayed(); }
     public void addBackpackToCart() { wait.clickable(backpackAdd).click(); }
     public void removeBackpack() { wait.clickable(backpackRemove).click(); }
     public void openCart() { wait.clickable(cart).click(); }
     public String getCartCount() { return wait.visible(cartBadge).getText(); }
-
-    public boolean isCartBadgePresent() {
-        return driver.findElements(cartBadge).size() > 0;
-    }
-
+    public boolean isCartBadgePresent() { return driver.findElements(cartBadge).size() > 0; }
     public void logout() {
         wait.clickable(menu).click();
         wait.clickable(logout).click();
