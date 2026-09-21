@@ -11,5 +11,9 @@ public class CartPage {
 
     public CartPage(WebDriver driver) { this.wait = new WaitUtils(driver); }
     public String getItemName() { return wait.visible(item).getText(); }
-    public void checkout() { wait.clickable(checkout).click(); }
+
+    public void checkout() {
+        wait.jsClick(checkout);
+        wait.urlContains("checkout-step-one");
+    }
 }
